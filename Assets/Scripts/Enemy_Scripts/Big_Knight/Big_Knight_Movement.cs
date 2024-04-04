@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Big_Knight_Movement : MonoBehaviour
@@ -42,3 +40,4 @@ public class Big_Knight_Movement : MonoBehaviour
         }
     }
 }
+
