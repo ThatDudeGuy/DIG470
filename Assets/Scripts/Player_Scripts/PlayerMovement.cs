@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,31 +6,21 @@ public class PlayerMovement : MonoBehaviour
     public int playerHealth = 3;
     public float speed;
     public float jumpForce, jumpTime;
-    private float jumpTimeCounter;
+    private float jumpTimeCounter, timer = 0f, timerInterval = 0.5f;
     private Vector3 currentY;
     public int dashing = 0, increment = 1, slideIncrement = 2, sliding = 0;
-    private bool rightFace = true, isGrounded, isJumping, startDash; //startSlide;
-
-
-    
+    private bool rightFace = true, isGrounded, isJumping, startDash, dashAgain = true; //startSlide;
     Vector2 move;
     public Rigidbody2D rb;
-   // public GameObject ninja;
-   // public Collider ninjaCollider;
-    // Start is called before the first frame update
     void Start()
     {
         playerHealth = 3;
         Application.targetFrameRate = 60;
-        //rb = GetComponent<Rigidbody2D>();
-        // ninja = GameObject.Find("ninja");
-        // ninjaCollider = ninja.GetComponent<Collider>();
-
-        //if(ninja) print("FOUND NINJA");
         jumpTime = 0.25f;
         speed = 250;
         jumpForce = 200;
     }
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Check for a match with the specified name on any GameObject that collides with your GameObject
@@ -87,21 +75,26 @@ public class PlayerMovement : MonoBehaviour
             
             jump(jumpForce);
 
-            if(Input.GetKeyDown("e")){
+            if(Input.GetKeyDown("e") && dashAgain){
                 startDash = true;
                 currentY = transform.localScale;
+                timer += Time.deltaTime;
             }
             // if(Input.GetKeyDown("q")){
             //     start_backDash = true;
             //     currentY = transform.localScale;
             // }
+            if(timer == 0f) dashAgain = true;
+            else if(timer >= timerInterval) timer = 0f;
+            else if(timer != 0f){
+                timer += Time.deltaTime;
+                dashAgain = false;
+            }
+
             dash(startDash, currentY.y);
             //backDash(start_backDash, currentY.y);
-            //OnCollisionEnter(ninjaCollider.OnCollisionEnter);
         }
     }
-
-   
 
     void flip(){
         rightFace = !rightFace;
@@ -138,14 +131,14 @@ public class PlayerMovement : MonoBehaviour
             increment = increment * -1;
         }
         if(begin_dash == true){
-            print(dashing);
+            //print(dashing);
             animator.SetBool("Dashing", true);
             dashing += increment;
             rb.velocity = new Vector2(move.x + dashing * speed * Time.deltaTime, yValue);
             if(dashing >= 8 || dashing <= -8){
-               startDash = false;
-               dashing = 0;
-               animator.SetBool("Dashing", false);
+                startDash = false;
+                dashing = 0;
+                animator.SetBool("Dashing", false);
             }
         }
     }
