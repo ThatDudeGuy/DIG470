@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 currentY;
     public int dashing = 0, increment = 1, slideIncrement = 2, sliding = 0;
     private bool rightFace = true, isGrounded, isJumping, startDash, dashAgain = true; //startSlide;
-    Vector2 move;
+    public Vector2 move;
     public Rigidbody2D rb;
     void Start()
     {
@@ -75,6 +75,9 @@ public class PlayerMovement : MonoBehaviour
             
             jump(jumpForce);
 
+            // if(isJumping && startDash) dashAgain = false;
+            // else if(!isJumping && !startDash) dashAgain = true;
+
             if(Input.GetKeyDown("e") && dashAgain){
                 startDash = true;
                 currentY = transform.localScale;
@@ -84,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             //     start_backDash = true;
             //     currentY = transform.localScale;
             // }
-            if(timer == 0f) dashAgain = true;
+            if(timer == 0f && !animator.GetBool("Jumping")) dashAgain = true;
             else if(timer >= timerInterval) timer = 0f;
             else if(timer != 0f){
                 timer += Time.deltaTime;
