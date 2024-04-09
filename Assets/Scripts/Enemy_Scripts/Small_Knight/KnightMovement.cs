@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KnightMovement : MonoBehaviour
@@ -20,19 +18,29 @@ public class KnightMovement : MonoBehaviour
     }
     
     private void OnTriggerEnter2D(Collider2D other) {
-        if(!other.CompareTag("Player")){
-            return;
-        }
-        animator.SetBool("Attack", true);
-        //Check for a match with the specified tag on any GameObject that collides with your GameObject
+        // if(!other.gameObject.CompareTag("Player")){
+        //     return;
+        // }
+        // else if(other.gameObject.CompareTag("Player")){
+        //     animator.SetBool("Attack", true);
+        // }
+        // //Check for a match with the specified tag on any GameObject that collides with your GameObject
         if(animator.GetBool("Attack") == true && playerAnimator.GetBool("Dashing")){
-            if(playerAnimator.GetBool("Dashing") == true){
+            // if(playerAnimator.GetBool("Dashing") == true){
                 animator.SetBool("Death", true);
-            }
-            else if(playerAnimator.GetBool("Dashing") == false){
+            // }
+            // else if(playerAnimator.GetBool("Dashing") == false){
                 
-            }
+            // }
         }
+        
+    }
+    public void setSpriteRenderer(){
+        playerAnimator.GetComponent<SpriteRenderer>().enabled = false;
+    }
+    public void setCollapse(){
+        animator.SetBool("Collapse", true);
+        playerAnimator.GetComponent<SpriteRenderer>().enabled = true;
     }
     void flip(){
         rightFace = !rightFace;
@@ -42,10 +50,16 @@ public class KnightMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.K)){
+            print("Attacking");
+            animator.SetBool("Attack", true);
+        }
+        if(animator.GetBool("Death")){
+            GetComponent<Collider2D>().enabled = false;
+        }
+    }
 
     // void FixedUpdate(){
     //     if(animator.GetBool("Death") == false){
