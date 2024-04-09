@@ -134,7 +134,658 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ea8bd7964585ef4d9a7213ddaac31ef
+      internalID: -1487375193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 731cd27085345b64c81358baf9acde2e
+      internalID: -215101792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 894337eb0395af8409906cb2ceb23605
+      internalID: -2123582220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 210bd0ccf5b71f445a95877892e94c0c
+      internalID: -1218092499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3fb27e6f4fa3844cb04822a2f61ad20
+      internalID: -300641874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8d403d31a8e57c4aaba2c9073398b13
+      internalID: 463007725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc323d47a2a786f4c8c8ad83455f12a1
+      internalID: 434083613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c10b6f0c43f5a1a4b991f14fbede5c8b
+      internalID: -373265172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7837864827eeb144f8f6ce9a302e6210
+      internalID: -1811873711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_9
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 152
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0fa6406934c5804b97b549c11228114
+      internalID: -1511412189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 114
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56fe5060248b0e1439dce3f4b4cccf1a
+      internalID: -1396494385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_11
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 114
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfabff83d69644d4097cc6fc87de5d03
+      internalID: 610899722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_12
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 114
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1822fd79fb00fef41b0c7d98c62cb1e6
+      internalID: -2008124013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_13
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 114
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a1a3e16dd6acf4d8bec0cce9b754f1
+      internalID: -1604974947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_14
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 114
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f65cd6d3f6404846a3edbe6a4483f6f
+      internalID: -1917138862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_15
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 114
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 869ba2eeb4a114b419dbf7050a54b8e2
+      internalID: 2032597278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_16
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 114
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0427fe6beaebebe44bc08b1b80cc3b67
+      internalID: -1640185038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_17
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 114
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f787fc81def49d42b8e04e8b0bdb043
+      internalID: 1323748184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 76
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d730660efeb312479120836088f9885
+      internalID: -778120240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_19
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 76
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c50b8a3e06218e3418d343ba40093cb5
+      internalID: -768669763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_20
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 76
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a036261cad053c14b9b01947e4294701
+      internalID: 938101577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_21
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 76
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b455000332ea7ae40a3973bb9dff40fd
+      internalID: -1494062603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_22
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 76
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 503d50806d2a7b24e8791d5ba95e2da6
+      internalID: 110957819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_23
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 76
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eed85303c2f67284c912823d2c762064
+      internalID: 1977777748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_24
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 76
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68de59e85a09be242b878b828485ce64
+      internalID: -1856693903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 38
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5658ec3e4e0f28d4f9bd8b4f7e317737
+      internalID: 1327008737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_26
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 38
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4f24a6764f8faa45a6d2e08d0293a34
+      internalID: -1151000291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_27
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 38
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96acaa9d1ac36e44a81f3551ecc6ca5c
+      internalID: 1780961368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48dabc587b800004593d5ee3ae532716
+      internalID: 420648544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_29
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57b79097fc0839a48b7fb6974f2e573a
+      internalID: 1884218738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: KnighEnemy_SpriteSheet_30
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 0
+        width: 90
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02fcf7fabe45f8a478fffd7710c02a25
+      internalID: -369399511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +796,38 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      KnighEnemy_SpriteSheet_0: -1487375193
+      KnighEnemy_SpriteSheet_1: -215101792
+      KnighEnemy_SpriteSheet_10: -1396494385
+      KnighEnemy_SpriteSheet_11: 610899722
+      KnighEnemy_SpriteSheet_12: -2008124013
+      KnighEnemy_SpriteSheet_13: -1604974947
+      KnighEnemy_SpriteSheet_14: -1917138862
+      KnighEnemy_SpriteSheet_15: 2032597278
+      KnighEnemy_SpriteSheet_16: -1640185038
+      KnighEnemy_SpriteSheet_17: 1323748184
+      KnighEnemy_SpriteSheet_18: -778120240
+      KnighEnemy_SpriteSheet_19: -768669763
+      KnighEnemy_SpriteSheet_2: -2123582220
+      KnighEnemy_SpriteSheet_20: 938101577
+      KnighEnemy_SpriteSheet_21: -1494062603
+      KnighEnemy_SpriteSheet_22: 110957819
+      KnighEnemy_SpriteSheet_23: 1977777748
+      KnighEnemy_SpriteSheet_24: -1856693903
+      KnighEnemy_SpriteSheet_25: 1327008737
+      KnighEnemy_SpriteSheet_26: -1151000291
+      KnighEnemy_SpriteSheet_27: 1780961368
+      KnighEnemy_SpriteSheet_28: 420648544
+      KnighEnemy_SpriteSheet_29: 1884218738
+      KnighEnemy_SpriteSheet_3: -1218092499
+      KnighEnemy_SpriteSheet_30: -369399511
+      KnighEnemy_SpriteSheet_4: -300641874
+      KnighEnemy_SpriteSheet_5: 463007725
+      KnighEnemy_SpriteSheet_6: 434083613
+      KnighEnemy_SpriteSheet_7: -373265172
+      KnighEnemy_SpriteSheet_8: -1811873711
+      KnighEnemy_SpriteSheet_9: -1511412189
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
