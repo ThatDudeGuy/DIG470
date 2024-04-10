@@ -3,18 +3,14 @@ using UnityEngine;
 public class KnightMovement : MonoBehaviour
 {
     public Animator animator, playerAnimator;
-    public float speed;
-    public int direction = 1;
-    private bool rightFace = true;
-    Rigidbody2D rb;
-    Vector3 position;
+    public float speed = 0.5f;
+    public bool move = false;
+    // private bool rightFace = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 100;
-        rb = GetComponent<Rigidbody2D>();
-        position = transform.localPosition;
+        speed = 0.5f;
     }
     
     private void OnTriggerEnter2D(Collider2D other) {
@@ -42,12 +38,12 @@ public class KnightMovement : MonoBehaviour
         animator.SetBool("Collapse", true);
         playerAnimator.GetComponent<SpriteRenderer>().enabled = true;
     }
-    void flip(){
-        rightFace = !rightFace;
-        Vector3 Scaler = transform.localScale;
-        Scaler.x = Scaler.x * -1;
-        transform.localScale = Scaler;
-    }
+    // void flip(){
+    //     rightFace = !rightFace;
+    //     Vector3 Scaler = transform.localScale;
+    //     Scaler.x = Scaler.x * -1;
+    //     transform.localScale = Scaler;
+    // }
 
     // Update is called once per frame
     void Update()
@@ -59,8 +55,25 @@ public class KnightMovement : MonoBehaviour
         if(animator.GetBool("Death")){
             GetComponent<Collider2D>().enabled = false;
         }
+        
+    }
+    void FixedUpdate() {
+        if(move){
+           walkForward();
+        }
     }
 
+    public void walkForward(){
+        //never use a while loop
+        animator.SetBool("Moving", true);
+        transform.position += speed * Time.deltaTime * Vector3.right;
+        print(transform.position.x - playerAnimator.gameObject.transform.localPosition.x);
+        if(transform.position.x - playerAnimator.gameObject.transform.localPosition.x >= 0f){ 
+            move = false;
+            animator.SetBool("Moving", false);
+            GetComponent<AudioSource>().Play();
+        }
+    }
     // void FixedUpdate(){
     //     if(animator.GetBool("Death") == false){
     //         // if(Input.GetKeyDown("p")){

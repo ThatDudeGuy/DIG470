@@ -41,9 +41,13 @@ public class Plate_Behaviour : MonoBehaviour
     public void liftGate(){
         gateOpen = true;
         gate.transform.position += openStrength * 5 * Time.deltaTime * Vector3.up;
+        gate.GetComponent<Gate_Behaviour>().audio[1].Stop();
+        gate.GetComponent<Gate_Behaviour>().audio[0].Play();
     }
     public void closeGate(){
         gateOpen = false;
+        gate.GetComponent<Gate_Behaviour>().audio[0].Stop();
+        gate.GetComponent<Gate_Behaviour>().audio[1].Play();
         if(gate.transform.position.y > Gate_Behaviour.Y_LOCATION_BOTTOM) gate.transform.position += openStrength * 2 * Time.deltaTime * Vector3.down;
     }
 }

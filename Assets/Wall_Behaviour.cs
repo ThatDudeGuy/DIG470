@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class Wall_Behaviour : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject player, knight;
     private PlayerMovement playerStats;
 
     private void Start() {
         playerStats = player.GetComponent<PlayerMovement>();
     }
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Player")){
-            playerStats.move.x = 0;
-            print("Hi Player");
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.CompareTag("Player") && name == "entranceCollider_endRoom"){
+            playerStats.can_I_Move = false;
+            foreach(AnimatorControllerParameter parameter in player.GetComponent<Animator>().parameters){
+                player.GetComponent<Animator>().SetBool(parameter.name, false);
+            }
+            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            knight.GetComponent<KnightMovement>().move = true;
         }
     }
 

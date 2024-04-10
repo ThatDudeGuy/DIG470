@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpTimeCounter, timer = 0f, timerInterval = 0.5f;
     private Vector3 currentY;
     public int dashing = 0, increment = 1, slideIncrement = 2, sliding = 0;
-    private bool rightFace = true, isGrounded, isJumping, startDash, dashAgain = true; //startSlide;
+    public bool rightFace = true, isGrounded, isJumping, startDash, dashAgain = true, can_I_Move = true; //startSlide;
     public Vector2 move;
     public Rigidbody2D rb;
     void Start()
@@ -43,52 +43,54 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        if(animator.GetBool("Death") == false){
-            if(Input.GetKeyDown("m")){
-                animator.SetBool("Death", true);
-            }
-            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            if(move.x > 0 || move.x < 0){
-                animator.SetBool("Moving", true);
-            }
-            else{
-                animator.SetBool("Moving", false);
-            }
+        if(can_I_Move){
+            if(animator.GetBool("Death") == false){
+                if(Input.GetKeyDown("m")){
+                    animator.SetBool("Death", true);
+                }
+                move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                if(move.x > 0 || move.x < 0){
+                    animator.SetBool("Moving", true);
+                }
+                else{
+                    animator.SetBool("Moving", false);
+                }
 
-            if(rightFace == false && move.x > 0){
-                flip();
-            }
-            else if(rightFace == true && move.x < 0){
-                flip();
-            }
-            //rb.AddForce(move * speed * Time.deltaTime);
-            rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y);
+                if(rightFace == false && move.x > 0){
+                    flip();
+                }
+                else if(rightFace == true && move.x < 0){
+                    flip();
+                }
+                //rb.AddForce(move * speed * Time.deltaTime);
+                rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y);
 
-            //The math here is defined as move.x = (-1 to 1) * speed * 
-            
-            jump(jumpForce);
+                //The math here is defined as move.x = (-1 to 1) * speed * 
+                
+                jump(jumpForce);
 
-            // if(isJumping && startDash) dashAgain = false;
-            // else if(!isJumping && !startDash) dashAgain = true;
+                // if(isJumping && startDash) dashAgain = false;
+                // else if(!isJumping && !startDash) dashAgain = true;
 
-            if(Input.GetKeyDown("e") && dashAgain){
-                startDash = true;
-                currentY = transform.localScale;
-                timer += Time.deltaTime;
+                if(Input.GetKeyDown("e") && dashAgain){
+                    startDash = true;
+                    currentY = transform.localScale;
+                    timer += Time.deltaTime;
+                }
+                // if(Input.GetKeyDown("q")){
+                //     start_backDash = true;
+                //     currentY = transform.localScale;
+                // }
+                if(timer == 0f && !animator.GetBool("Jumping")) dashAgain = true;
+                else if(timer >= timerInterval) timer = 0f;
+                else if(timer != 0f){
+                    timer += Time.deltaTime;
+                    dashAgain = false;
+                }
+
+                dash(startDash, currentY.y);
+                //backDash(start_backDash, currentY.y);
             }
-            // if(Input.GetKeyDown("q")){
-            //     start_backDash = true;
-            //     currentY = transform.localScale;
-            // }
-            if(timer == 0f && !animator.GetBool("Jumping")) dashAgain = true;
-            else if(timer >= timerInterval) timer = 0f;
-            else if(timer != 0f){
-                timer += Time.deltaTime;
-                dashAgain = false;
-            }
-
-            dash(startDash, currentY.y);
-            //backDash(start_backDash, currentY.y);
         }
     }
 
@@ -137,6 +139,10 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("Dashing", false);
             }
         }
+    }
+
+    public void setMove(){
+        can_I_Move = !can_I_Move;
     }
 
     // void backDash(bool begin_backDash){
