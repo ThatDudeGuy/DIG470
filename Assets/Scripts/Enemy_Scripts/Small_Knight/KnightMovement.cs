@@ -49,7 +49,7 @@ public class KnightMovement : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.K)){
-            print("Attacking");
+            // print("Attacking");
             animator.SetBool("Attack", true);
         }
         if(animator.GetBool("Death")){
@@ -67,7 +67,7 @@ public class KnightMovement : MonoBehaviour
         //never use a while loop
         animator.SetBool("Moving", true);
         transform.position += speed * Time.deltaTime * Vector3.right;
-        print(transform.position.x - playerAnimator.gameObject.transform.localPosition.x);
+        // print(transform.position.x - playerAnimator.gameObject.transform.localPosition.x);
         if(transform.position.x - playerAnimator.gameObject.transform.localPosition.x >= 0f){ 
             move = false;
             animator.SetBool("Moving", false);

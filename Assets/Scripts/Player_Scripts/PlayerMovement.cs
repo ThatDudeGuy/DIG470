@@ -1,17 +1,20 @@
 using UnityEngine;
-
+using Cinemachine;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
     public int playerHealth = 3;
+    public AudioSource audioSource;
     public float speed;
     public float jumpForce, jumpTime;
     private float jumpTimeCounter, timer = 0f, timerInterval = 0.5f;
     private Vector3 currentY;
     public int dashing = 0, increment = 1, slideIncrement = 2, sliding = 0;
     public bool rightFace = true, isGrounded, isJumping, startDash, dashAgain = true, can_I_Move = true; //startSlide;
+    public bool playOnce = true;
     public Vector2 move;
     public Rigidbody2D rb;
+    public CinemachineVirtualCamera myCamera, otherCamera;
     void Start()
     {
         playerHealth = 3;
@@ -19,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
         jumpTime = 0.25f;
         speed = 250;
         jumpForce = 200;
+        myCamera.enabled = true;
+        otherCamera.enabled = false;
     }
     
     void OnCollisionEnter2D(Collision2D collision)
@@ -43,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
+        if(Input.GetKeyDown(KeyCode.L)){
+            myCamera.enabled = !myCamera.enabled;
+            otherCamera.enabled = !otherCamera.enabled;
+        }
         if(can_I_Move){
             if(animator.GetBool("Death") == false){
                 if(Input.GetKeyDown("m")){
@@ -51,9 +60,15 @@ public class PlayerMovement : MonoBehaviour
                 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
                 if(move.x > 0 || move.x < 0){
                     animator.SetBool("Moving", true);
+                    if(isGrounded && playOnce){
+                        audioSource.Play();
+                        playOnce = false;
+                    }
                 }
                 else{
+                    audioSource.Stop();
                     animator.SetBool("Moving", false);
+                    playOnce = true;
                 }
 
                 if(rightFace == false && move.x > 0){
@@ -107,11 +122,15 @@ public class PlayerMovement : MonoBehaviour
             jumpTimeCounter = jumpTime;
         }
         if(Input.GetKeyUp("space") && isGrounded == false){
+            audioSource.Stop();
+            playOnce = true;
             animator.SetBool("Falling", true);
             isJumping = false;
         }
         if(Input.GetKey("space") && isGrounded == false && isJumping == true){
             if(jumpTimeCounter > 0){
+                audioSource.Stop();
+                playOnce = true;
                 rb.velocity = new Vector2(rb.velocity.x, force * Time.deltaTime);
                 jumpTimeCounter -= Time.deltaTime;
                 animator.SetBool("Falling", true);
