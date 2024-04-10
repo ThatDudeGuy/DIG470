@@ -1,5 +1,4 @@
 using UnityEngine;
-using Cinemachine;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
@@ -14,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     public bool playOnce = true;
     public Vector2 move;
     public Rigidbody2D rb;
-    public CinemachineVirtualCamera myCamera, otherCamera;
     void Start()
     {
         playerHealth = 3;
@@ -22,8 +20,6 @@ public class PlayerMovement : MonoBehaviour
         jumpTime = 0.25f;
         speed = 250;
         jumpForce = 200;
-        myCamera.enabled = true;
-        otherCamera.enabled = false;
     }
     
     void OnCollisionEnter2D(Collision2D collision)
@@ -48,10 +44,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.L)){
-            myCamera.enabled = !myCamera.enabled;
-            otherCamera.enabled = !otherCamera.enabled;
-        }
         if(can_I_Move){
             if(animator.GetBool("Death") == false){
                 if(Input.GetKeyDown("m")){

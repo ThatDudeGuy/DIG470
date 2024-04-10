@@ -1,12 +1,15 @@
 using UnityEngine;
-
+using Cinemachine;
 public class Wall_Behaviour : MonoBehaviour
 {
     public GameObject player, knight;
     private PlayerMovement playerStats;
+    public CinemachineVirtualCamera myCamera, otherCamera;
 
     private void Start() {
         playerStats = player.GetComponent<PlayerMovement>();
+        myCamera.enabled = true;
+        otherCamera.enabled = false;
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player") && name == "entranceCollider_endRoom"){
@@ -17,6 +20,8 @@ public class Wall_Behaviour : MonoBehaviour
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             knight.GetComponent<KnightMovement>().move = true;
             playerStats.audioSource.Stop();
+            myCamera.enabled = !myCamera.enabled;
+            otherCamera.enabled = !otherCamera.enabled;
         }
     }
 
