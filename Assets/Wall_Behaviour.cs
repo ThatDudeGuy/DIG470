@@ -2,14 +2,22 @@ using UnityEngine;
 using Cinemachine;
 public class Wall_Behaviour : MonoBehaviour
 {
-    public GameObject player, knight;
+    public GameObject player;
+    private GameObject knight;
     private PlayerMovement playerStats;
-    public CinemachineVirtualCamera myCamera, otherCamera;
+    private CinemachineVirtualCamera myCamera, otherCamera;
+    public AudioSource gameMusic;
 
     private void Start() {
         playerStats = player.GetComponent<PlayerMovement>();
-        myCamera.enabled = true;
-        otherCamera.enabled = false;
+        knight = GameObject.Find("KnightEnemy");
+        if(name == "entranceCollider_endRoom"){
+            myCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+            otherCamera = GameObject.Find("Camera_Looks_Here").GetComponent<CinemachineVirtualCamera>();
+            //myCamera.enabled = true;
+            otherCamera.enabled = false;
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player") && name == "entranceCollider_endRoom"){
@@ -22,6 +30,8 @@ public class Wall_Behaviour : MonoBehaviour
             playerStats.audioSource.Stop();
             myCamera.enabled = !myCamera.enabled;
             otherCamera.enabled = !otherCamera.enabled;
+            //i want to subtract the volume by time.deltaTime to get a fadeout effect
+            // gameMusic.volume = 0;
         }
     }
 

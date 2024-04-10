@@ -3,6 +3,7 @@ using UnityEngine;
 public class springScript : MonoBehaviour
 {
     public GameObject player;
+    public AudioSource audio;
     public float pushPower = 12.5f;
     private Animator animator;
     private void Start() {
@@ -34,5 +35,6 @@ public class springScript : MonoBehaviour
 
     public void pushUp(){
         if(animator.GetBool("extend")) player.GetComponent<PlayerMovement>().rb.AddForce(Vector3.up * pushPower, ForceMode2D.Impulse);
+        audio.Play();
     }
 }
