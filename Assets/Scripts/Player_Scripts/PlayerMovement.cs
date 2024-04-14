@@ -46,9 +46,9 @@ public class PlayerMovement : MonoBehaviour
     void Update() {
         if(can_I_Move){
             if(animator.GetBool("Death") == false){
-                if(Input.GetKeyDown("m")){
-                    animator.SetBool("Death", true);
-                }
+                // if(Input.GetKeyDown("m")){
+                //     animator.SetBool("Death", true);
+                // }
                 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
                 if(move.x > 0 || move.x < 0){
                     animator.SetBool("Moving", true);

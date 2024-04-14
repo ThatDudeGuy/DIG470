@@ -5,6 +5,7 @@ public class KnightMovement : MonoBehaviour
     public Animator animator, playerAnimator;
     public float speed = 0.5f;
     public bool move = false;
+    public AudioSource[] sounds;
     // private bool rightFace = true;
 
     // Start is called before the first frame update
@@ -58,7 +59,7 @@ public class KnightMovement : MonoBehaviour
         
     }
     void FixedUpdate() {
-        if(move){
+        if(move && !sounds[0].isPlaying){
            walkForward();
         }
     }
@@ -71,7 +72,7 @@ public class KnightMovement : MonoBehaviour
         if(transform.position.x - playerAnimator.gameObject.transform.localPosition.x >= 0f){ 
             move = false;
             animator.SetBool("Moving", false);
-            GetComponent<AudioSource>().Play();
+            sounds[1].Play();
         }
     }
     // void FixedUpdate(){

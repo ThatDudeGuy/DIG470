@@ -17,7 +17,7 @@ public class Gate_Behaviour : MonoBehaviour
             }
         } 
         else {
-            if (transform.localPosition.y < Y_LOCATION_BOTTOM) {
+            if (transform.localPosition.y < Y_LOCATION_BOTTOM + 0.1f) {
                 pressurePlate.GetComponent<Plate_Behaviour>().stop = true;
                 audio[1].Stop();
             } else if (transform.localPosition.y <= Y_LOCATION_TOP) {
