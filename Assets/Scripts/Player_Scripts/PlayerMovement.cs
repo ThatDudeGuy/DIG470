@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public bool playOnce = true;
     public Vector2 move;
     public Rigidbody2D rb;
+    public GameObject mainMusic;
     void Start()
     {
         playerHealth = 3;
@@ -45,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update() {
         if(can_I_Move){
+            // if(mainMusic.GetComponent<AudioSource>().volume < 0.2f)
+            //     mainMusic.GetComponent<AudioSource>().volume += Time.deltaTime;
             if(animator.GetBool("Death") == false){
                 // if(Input.GetKeyDown("m")){
                 //     animator.SetBool("Death", true);
@@ -98,6 +101,11 @@ public class PlayerMovement : MonoBehaviour
                 dash(startDash, currentY.y);
                 //backDash(start_backDash, currentY.y);
             }
+        }
+        else{
+            // if(mainMusic.GetComponent<AudioSource>().volume > 0)
+            //     mainMusic.GetComponent<AudioSource>().volume -= Time.deltaTime;
+            mainMusic.GetComponent<AudioSource>().Stop();
         }
     }
 
