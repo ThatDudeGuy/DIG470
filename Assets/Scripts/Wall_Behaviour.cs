@@ -10,19 +10,19 @@ public class Wall_Behaviour : MonoBehaviour
 
     private void Start() {
         playerStats = player.GetComponent<PlayerMovement>();
-        knight = GameObject.Find("KnightEnemy");
-        // if(name == "entranceCollider_endRoom"){
-        //     myCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
-        //     otherCamera = GameObject.Find("Camera_Looks_Here").GetComponent<CinemachineVirtualCamera>();
-        //     myCamera.enabled = true;
-        //     otherCamera.enabled = false;
-        // }
+        if(name == "entranceCollider_endRoom"){
+            knight = GameObject.Find("KnightEnemy");
+            // myCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+            // otherCamera = GameObject.Find("Camera_Looks_Here").GetComponent<CinemachineVirtualCamera>();
+            // myCamera.enabled = true;
+            // otherCamera.enabled = false;
+        }
         
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player") && name == "entranceCollider_endRoom" && endGame == false){
             playerStats.can_I_Move = false;
-            endGame = true;
+            //endGame = true;
             GameObject.Find("Camera_Looks_Here").GetComponent<follow_Knight>().setCamera_on_off();
             foreach(AnimatorControllerParameter parameter in player.GetComponent<Animator>().parameters){
                 player.GetComponent<Animator>().SetBool(parameter.name, false);
@@ -62,14 +62,15 @@ public class Wall_Behaviour : MonoBehaviour
             playerStats.rb.gravityScale = 2;
         }
     }
-    // void Update()
-    // {
-        //write code that will push the player slightly away from the wall so that
-        //the player is not stuck when moving into the wall
+    void Update()
+    {
+        if(name == "entranceCollider_endRoom" && knight.GetComponent<Animator>().GetBool("Attack")){
+            endGame = true;
+        }   
+        else{
+            return;
+        }
 
-        //or set the players movespeed to 0 when trying to move into the wall
 
-
-
-    // }
+    }
 }

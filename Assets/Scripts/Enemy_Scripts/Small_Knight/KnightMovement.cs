@@ -1,10 +1,14 @@
 using UnityEngine;
-
+using Cinemachine;
 public class KnightMovement : MonoBehaviour
 {
     public Animator animator, playerAnimator;
-    public float speed = 0.5f;
-    public bool move = false;
+    public Rigidbody2D playerRigidBody;
+    public Collider2D[] colliders;
+    private CinemachineVirtualCamera otherCamera;
+    public float speed = 0.5f, timer = 0f, timerInterval = 2f, pushPower = 5f;
+    public bool move = false, attack = false, push = false;
+    Vector3 playPos;
     public AudioSource[] sounds;
     // private bool rightFace = true;
 
@@ -12,23 +16,31 @@ public class KnightMovement : MonoBehaviour
     void Start()
     {
         speed = 0.5f;
+        otherCamera = GameObject.Find("Camera_Looks_Here").GetComponent<CinemachineVirtualCamera>();
     }
     
     private void OnTriggerEnter2D(Collider2D other) {
-        // if(!other.gameObject.CompareTag("Player")){
-        //     return;
-        // }
+        if(!other.gameObject.CompareTag("Player")){
+            return;
+        }
         // else if(other.gameObject.CompareTag("Player")){
         //     animator.SetBool("Attack", true);
         // }
         // //Check for a match with the specified tag on any GameObject that collides with your GameObject
         if(animator.GetBool("Attack") == true && playerAnimator.GetBool("Dashing")){
             // if(playerAnimator.GetBool("Dashing") == true){
+                playerRigidBody.velocity = Vector2.zero;
                 animator.SetBool("Death", true);
             // }
             // else if(playerAnimator.GetBool("Dashing") == false){
                 
             // }
+        }
+        else{
+            print("hello");
+            playPos = playerAnimator.transform.position;
+            push = true;
+
         }
         
     }
@@ -49,16 +61,46 @@ public class KnightMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K)){
-            // print("Attacking");
-            animator.SetBool("Attack", true);
+        // if(Input.GetKeyDown(KeyCode.K)){
+        //     // print("Attacking");
+        //     animator.SetBool("Attack", true);
+        // }
+        if(playPos.x + 5f > playerAnimator.transform.position.x && push && !animator.GetBool("Death")){
+            playerAnimator.transform.position += pushPower * Time.deltaTime * Vector3.right;
+        }
+        else{
+            push = false;
         }
         if(animator.GetBool("Death")){
-            GetComponent<Collider2D>().enabled = false;
+            foreach(Collider2D collider in colliders){
+                collider.enabled = false;
+            }
+            // GetComponent<BoxCollider2D>().enabled = false;
         }
         
     }
     void FixedUpdate() {
+        // if(!sounds[1].isPlaying && attack) animator
+        if(!animator.GetBool("Death")){
+            if(timer == 0f && !sounds[1].isPlaying && attack){ 
+                animator.SetBool("Attack", true);
+                attack = false;
+                otherCamera.Priority = -10;
+                timer += Time.deltaTime;
+
+            }
+            else if(timer >= timerInterval){ 
+                timer = 0f;
+                animator.SetBool("Attack", false);
+                attack = true;
+            }
+            else if(timer != 0f){
+                // print("hello");
+                timer += Time.deltaTime;
+                
+            }
+        }
+
         if(move && !sounds[0].isPlaying){
            walkForward();
         }
@@ -73,8 +115,11 @@ public class KnightMovement : MonoBehaviour
             move = false;
             animator.SetBool("Moving", false);
             sounds[1].Play();
+            attack = true;
+            // timer += Time.deltaTime;
         }
     }
+
     // void FixedUpdate(){
     //     if(animator.GetBool("Death") == false){
     //         // if(Input.GetKeyDown("p")){

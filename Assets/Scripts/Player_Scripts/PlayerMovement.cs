@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public bool playOnce = true;
     public Vector2 move;
     public Rigidbody2D rb;
-    public GameObject mainMusic;
+    public GameObject mainMusic, end_wall_Collider, knight;
     void Start()
     {
         playerHealth = 3;
@@ -106,6 +106,45 @@ public class PlayerMovement : MonoBehaviour
             // if(mainMusic.GetComponent<AudioSource>().volume > 0)
             //     mainMusic.GetComponent<AudioSource>().volume -= Time.deltaTime;
             mainMusic.GetComponent<AudioSource>().Stop();
+        }
+
+        //dumb solution
+        if(end_wall_Collider.GetComponent<Wall_Behaviour>().endGame == true && !knight.GetComponent<KnightMovement>().push){
+            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if(move.x > 0 || move.x < 0){
+                animator.SetBool("Moving", true);
+                if(isGrounded && playOnce){
+                    audioSource.Play();
+                    playOnce = false;
+                }
+            }
+            else{
+                audioSource.Stop();
+                animator.SetBool("Moving", false);
+                playOnce = true;
+            }
+
+            if(rightFace == false && move.x > 0){
+                flip();
+            }
+            else if(rightFace == true && move.x < 0){
+                flip();
+            }
+            //rb.AddForce(move * speed * Time.deltaTime);
+            rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y);
+            if(Input.GetKeyDown("e") && dashAgain){
+                    startDash = true;
+                    currentY = transform.localScale;
+                    timer += Time.deltaTime;
+            }
+            if(timer == 0f && !animator.GetBool("Jumping")) dashAgain = true;
+            else if(timer >= timerInterval) timer = 0f;
+            else if(timer != 0f){
+                timer += Time.deltaTime;
+                dashAgain = false;
+            }
+
+            dash(startDash, currentY.y);
         }
     }
 
