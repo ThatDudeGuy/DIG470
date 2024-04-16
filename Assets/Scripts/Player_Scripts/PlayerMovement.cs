@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Falling", false);
             //animator.SetBool("Landing", true);
         }
+        // if(collision.gameObject.name == "theEnd") go to next screen
     }
     void OnCollisionExit2D(Collision2D collision)
     {

@@ -31,6 +31,7 @@ public class Wall_Behaviour : MonoBehaviour
             knight.GetComponent<KnightMovement>().move = true;
             knight.GetComponent<KnightMovement>().sounds[0].Play();
             playerStats.audioSource.Stop();
+            GameObject.Find("blockDoor").GetComponent<Collider2D>().isTrigger = false;
             // myCamera.enabled = !myCamera.enabled;
             // otherCamera.enabled = !otherCamera.enabled;
             //i want to subtract the volume by time.deltaTime to get a fadeout effect

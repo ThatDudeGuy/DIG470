@@ -5,7 +5,7 @@ public class KnightMovement : MonoBehaviour
     public Animator animator, playerAnimator;
     public Rigidbody2D playerRigidBody;
     public Collider2D[] colliders;
-    private CinemachineVirtualCamera otherCamera;
+    private CinemachineVirtualCamera otherCamera, playerCamera;
     public float speed = 0.5f, timer = 0f, timerInterval = 2f, pushPower = 5f;
     public bool move = false, attack = false, push = false;
     Vector3 playPos;
@@ -17,8 +17,23 @@ public class KnightMovement : MonoBehaviour
     {
         speed = 0.5f;
         otherCamera = GameObject.Find("Camera_Looks_Here").GetComponent<CinemachineVirtualCamera>();
+        playerCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+
     }
-    
+    public void cameraZoomIn(){
+        playerCamera.m_Lens.OrthographicSize = 2f;
+        GameObject.Find("battleMusic").GetComponent<AudioSource>().Pause();
+    }
+    public void cameraZoomOut(){
+        playerCamera.m_Lens.OrthographicSize = 5f;
+    }
+    public void playBattleMusic(){
+        GameObject.Find("battleMusic").GetComponent<AudioSource>().Play();
+    }
+    public void deathGrunt(){
+        sounds[2].Play();
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if(!other.gameObject.CompareTag("Player")){
             return;
@@ -31,6 +46,7 @@ public class KnightMovement : MonoBehaviour
             // if(playerAnimator.GetBool("Dashing") == true){
                 playerRigidBody.velocity = Vector2.zero;
                 animator.SetBool("Death", true);
+                GameObject.Find("theEnd").GetComponent<Collider2D>().isTrigger = true;
             // }
             // else if(playerAnimator.GetBool("Dashing") == false){
                 
@@ -49,6 +65,7 @@ public class KnightMovement : MonoBehaviour
     }
     public void setCollapse(){
         animator.SetBool("Collapse", true);
+        sounds[3].Play();
         playerAnimator.GetComponent<SpriteRenderer>().enabled = true;
     }
     // void flip(){
@@ -116,6 +133,8 @@ public class KnightMovement : MonoBehaviour
             animator.SetBool("Moving", false);
             sounds[1].Play();
             attack = true;
+            playerAnimator.GetComponent<PlayerMovement>().startDash = false;
+            GameObject.Find("battleMusic").GetComponent<AudioSource>().PlayDelayed(3);
             // timer += Time.deltaTime;
         }
     }
