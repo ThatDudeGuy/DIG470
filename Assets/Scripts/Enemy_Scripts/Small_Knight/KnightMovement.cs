@@ -53,7 +53,7 @@ public class KnightMovement : MonoBehaviour
             // }
         }
         else{
-            print("hello");
+            // print("hello");
             playPos = playerAnimator.transform.position;
             push = true;
 

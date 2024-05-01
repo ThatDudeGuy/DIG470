@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpTimeCounter, timer = 0f, timerInterval = 0.5f;
     private Vector3 currentY;
     public int dashing = 0, increment = 1, slideIncrement = 2, sliding = 0;
-    public bool rightFace = true, isGrounded, isJumping, startDash, dashAgain = true, can_I_Move = true; //startSlide;
+    public bool rightFace = true, isGrounded, isJumping, startDash, dashAgain = true, can_I_Move = true, walking = false; //startSlide;
     public bool playOnce = true;
     public Vector2 move;
     public Rigidbody2D rb;
@@ -34,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("Falling", false);
             //animator.SetBool("Landing", true);
         }
+        if (collision.gameObject.name == "KnightEnemy"){
+            // playPos = playerAnimator.transform.position;
+            rb.velocity = Vector2.zero;
+            GameObject.Find("KnightEnemy").GetComponent<KnightMovement>().push = true;
+        }
         // if(collision.gameObject.name == "theEnd") go to next screen
     }
     void OnCollisionExit2D(Collision2D collision)
@@ -45,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
             //animator.SetBool("Landing", false);
         }
     }
-
     void Update() {
         if(can_I_Move){
             // if(mainMusic.GetComponent<AudioSource>().volume < 0.2f)
@@ -55,14 +59,18 @@ public class PlayerMovement : MonoBehaviour
                 //     animator.SetBool("Death", true);
                 // }
                 move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                
                 if(move.x > 0 || move.x < 0){
                     animator.SetBool("Moving", true);
+                    walking = true;
                     if(isGrounded && playOnce){
                         audioSource.Play();
                         playOnce = false;
                     }
                 }
                 else{
+                    // move = Vector2.zero;
+                    walking = false;
                     audioSource.Stop();
                     animator.SetBool("Moving", false);
                     playOnce = true;
@@ -75,11 +83,32 @@ public class PlayerMovement : MonoBehaviour
                     flip();
                 }
                 //rb.AddForce(move * speed * Time.deltaTime);
-                rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y);
+                if(Input.GetKeyDown("space") && isGrounded == true){
+                    isJumping = true;
+                    jumpTimeCounter = jumpTime;
+                }
+                if(Input.GetKeyUp("space") && isGrounded == false){
+                    audioSource.Stop();
+                    playOnce = true;
+                    animator.SetBool("Falling", true);
+                    isJumping = false;
+                }
+                if(Input.GetKey("space") && isGrounded == false && isJumping == true){
+                    if(jumpTimeCounter > 0){
+                        audioSource.Stop();
+                        playOnce = true;
+                        jumpTimeCounter -= Time.deltaTime;
+                        animator.SetBool("Falling", true);
+                    }
+                    else{
+                        isJumping = false;
+                    }
+                }
 
                 //The math here is defined as move.x = (-1 to 1) * speed * 
+
                 
-                jump(jumpForce);
+                // jump(jumpForce);
 
                 // if(isJumping && startDash) dashAgain = false;
                 // else if(!isJumping && !startDash) dashAgain = true;
@@ -100,8 +129,16 @@ public class PlayerMovement : MonoBehaviour
                     dashAgain = false;
                 }
 
-                dash(startDash, currentY.y);
+                // dash(startDash, currentY.y);
                 //backDash(start_backDash, currentY.y);
+
+                //for the dash
+                if(move.x < 0 && increment > 0){
+                    increment = increment * -1;
+                }
+                else if(move.x > 0 && increment < 0){
+                    increment = increment * -1;
+                }
             }
         }
         else{
@@ -112,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
 
         //dumb solution
         if(end_wall_Collider.GetComponent<Wall_Behaviour>().endGame == true && !knight.GetComponent<KnightMovement>().push){
-            move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            // move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if(move.x > 0 || move.x < 0){
                 animator.SetBool("Moving", true);
                 if(isGrounded && playOnce){
@@ -133,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
                 flip();
             }
             //rb.AddForce(move * speed * Time.deltaTime);
-            rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y);
+            // rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y);
             if(Input.GetKeyDown("e") && dashAgain){
                     startDash = true;
                     currentY = transform.localScale;
@@ -145,9 +182,32 @@ public class PlayerMovement : MonoBehaviour
                 timer += Time.deltaTime;
                 dashAgain = false;
             }
-
-            dash(startDash, currentY.y);
+            //for the dash
+            if(move.x < 0 && increment > 0){
+                increment = increment * -1;
+            }
+            else if(move.x > 0 && increment < 0){
+                increment = increment * -1;
+            }
+            // dash(startDash, currentY.y);
         }
+    }
+    void FixedUpdate() {
+        if(end_wall_Collider.GetComponent<Wall_Behaviour>().endGame == true && !knight.GetComponent<KnightMovement>().push && GetComponent<SpriteRenderer>().enabled){
+            if(walking) move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y); 
+            if(startDash) dash(startDash, currentY.y);  
+        }
+        // else{
+            if(can_I_Move){
+                if(walking) rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y); 
+                else rb.velocity = new Vector2(0f, rb.velocity.y);
+                if(isJumping) jump(jumpForce);
+                if(startDash) dash(startDash, currentY.y);  
+            }  
+        // } 
+         
+        
     }
 
     void flip(){
@@ -157,24 +217,24 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = Scaler;
     }
     void jump(float force){
-        if(Input.GetKeyDown("space") && isGrounded == true){
-            isJumping = true;
+        if(isGrounded == true){
+            // isJumping = true;
             rb.velocity = new Vector2(rb.velocity.x, force * Time.deltaTime);
-            jumpTimeCounter = jumpTime;
+            // jumpTimeCounter = jumpTime;
         }
-        if(Input.GetKeyUp("space") && isGrounded == false){
-            audioSource.Stop();
-            playOnce = true;
-            animator.SetBool("Falling", true);
-            isJumping = false;
-        }
-        if(Input.GetKey("space") && isGrounded == false && isJumping == true){
+        // if(Input.GetKeyUp("space") && isGrounded == false){
+        //     audioSource.Stop();
+        //     playOnce = true;
+        //     animator.SetBool("Falling", true);
+        //     isJumping = false;
+        // }
+        if(isGrounded == false && isJumping == true){
             if(jumpTimeCounter > 0){
-                audioSource.Stop();
-                playOnce = true;
+            //     audioSource.Stop();
+            //     playOnce = true;
                 rb.velocity = new Vector2(rb.velocity.x, force * Time.deltaTime);
-                jumpTimeCounter -= Time.deltaTime;
-                animator.SetBool("Falling", true);
+                // jumpTimeCounter -= Time.deltaTime;
+                // animator.SetBool("Falling", true);
             }
             else{
                 isJumping = false;
@@ -182,12 +242,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     void dash(bool begin_dash, float yValue){
-        if(move.x < 0 && increment > 0){
-            increment = increment * -1;
-        }
-        else if(move.x > 0 && increment < 0){
-            increment = increment * -1;
-        }
         if(begin_dash == true){
             //print(dashing);
             animator.SetBool("Dashing", true);

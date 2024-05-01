@@ -28,6 +28,7 @@ public class Wall_Behaviour : MonoBehaviour
                 player.GetComponent<Animator>().SetBool(parameter.name, false);
             }
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            // player.transform.position = transform.position;
             knight.GetComponent<KnightMovement>().move = true;
             knight.GetComponent<KnightMovement>().sounds[0].Play();
             playerStats.audioSource.Stop();
