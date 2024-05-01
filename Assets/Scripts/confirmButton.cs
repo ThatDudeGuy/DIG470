@@ -12,7 +12,7 @@ public class confirmButton : MonoBehaviour
     public void startGame(){
         if(confirmed){
             //click.Play();
-            SceneManager.UnloadSceneAsync("startScreen");
+            SceneManager.UnloadSceneAsync("StartScreen");
             SceneManager.LoadScene("Game");
         }      
     }
