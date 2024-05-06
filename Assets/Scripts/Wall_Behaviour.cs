@@ -22,6 +22,7 @@ public class Wall_Behaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player") && name == "entranceCollider_endRoom" && endGame == false){
             playerStats.can_I_Move = false;
+            playerStats.mainMusic.GetComponent<AudioSource>().Stop();
             //endGame = true;
             GameObject.Find("Camera_Looks_Here").GetComponent<follow_Knight>().setCamera_on_off();
             foreach(AnimatorControllerParameter parameter in player.GetComponent<Animator>().parameters){

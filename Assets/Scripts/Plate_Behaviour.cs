@@ -11,7 +11,7 @@ public class Plate_Behaviour : MonoBehaviour
         animator.enabled = false;
         stop = true;
         openStrength = 1f;
-        closeStrength = 4f;
+        closeStrength = 4.5f;
     }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player")){

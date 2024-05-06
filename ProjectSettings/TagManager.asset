@@ -7,6 +7,8 @@ TagManager:
   - Floor
   - Enemy
   - Wall
+  - key
+  - hint
   layers:
   - Default
   - TransparentFX

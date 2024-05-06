@@ -11,10 +11,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 currentY;
     public int dashing = 0, increment = 1, slideIncrement = 2, sliding = 0;
     public bool rightFace = true, isGrounded, isJumping, startDash, dashAgain = true, can_I_Move = true, walking = false; //startSlide;
-    public bool playOnce = true;
+    public bool playOnce = true, atBeginning = false, atGate = false, atSpring = false;
     public Vector2 move;
     public Rigidbody2D rb;
     public GameObject mainMusic, end_wall_Collider, knight;
+    public Hint_Handler hints;
     void Start()
     {
         playerHealth = 3;
@@ -23,7 +24,35 @@ public class PlayerMovement : MonoBehaviour
         speed = 250;
         jumpForce = 200;
     }
-    
+    private void OnTriggerEnter2D(Collider2D other) {
+        // print(other.gameObject.name);
+        if(other.gameObject.name == hints.collisionBoxes[0].name & !hints.pressA){
+            hints.keyImages[0].GetComponent<SpriteRenderer>().enabled = true;
+            hints.keyImages[1].GetComponent<SpriteRenderer>().enabled = true;
+            hints.keyImages[0].GetComponent<Animator>().SetBool("A", true);
+            hints.keyImages[1].GetComponent<Animator>().SetBool("D", true);
+            hints.hints[0].GetComponent<AudioSource>().Play();
+            mainMusic.GetComponent<AudioSource>().volume /= 4;
+            atBeginning = true;
+        }
+        else if(other.gameObject.name == hints.collisionBoxes[1].name){
+            atGate = true;
+            Destroy(hints.keyImages[2]);
+        }
+        else if(other.gameObject.name == hints.collisionBoxes[2].name){
+            atSpring = true;
+        }
+        else if(other.gameObject.name == hints.collisionBoxes[3].name){
+            atSpring = false;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other) {
+        if(other.gameObject.name == hints.collisionBoxes[0].name & hints.pressA){
+            mainMusic.GetComponent<AudioSource>().volume *= 4;
+            atBeginning = false;
+        }
+
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         //Check for a match with the specific tag on any GameObject that collides with your GameObject
@@ -38,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
             // playPos = playerAnimator.transform.position;
             rb.velocity = Vector2.zero;
             GameObject.Find("KnightEnemy").GetComponent<KnightMovement>().push = true;
+            GameObject.Find("KnightEnemy").GetComponent<KnightMovement>().num_of_Attempts += 1;
         }
         // if(collision.gameObject.name == "theEnd") go to next screen
     }
@@ -51,6 +81,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     void Update() {
+        if(atBeginning && Input.GetKeyDown(KeyCode.P)){
+            hints.hints[0].GetComponent<AudioSource>().Stop();
+            hints.hints[0].GetComponent<AudioSource>().Play();
+        }
         if(can_I_Move){
             // if(mainMusic.GetComponent<AudioSource>().volume < 0.2f)
             //     mainMusic.GetComponent<AudioSource>().volume += Time.deltaTime;
@@ -141,11 +175,11 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-        else{
-            // if(mainMusic.GetComponent<AudioSource>().volume > 0)
-            //     mainMusic.GetComponent<AudioSource>().volume -= Time.deltaTime;
-            mainMusic.GetComponent<AudioSource>().Stop();
-        }
+        // else{
+        //     // if(mainMusic.GetComponent<AudioSource>().volume > 0)
+        //     //     mainMusic.GetComponent<AudioSource>().volume -= Time.deltaTime;
+        //     mainMusic.GetComponent<AudioSource>().Stop();
+        // }
 
         //dumb solution
         if(end_wall_Collider.GetComponent<Wall_Behaviour>().endGame == true && !knight.GetComponent<KnightMovement>().push){
@@ -193,13 +227,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     void FixedUpdate() {
-        if(end_wall_Collider.GetComponent<Wall_Behaviour>().endGame == true && !knight.GetComponent<KnightMovement>().push && GetComponent<SpriteRenderer>().enabled){
+        if(end_wall_Collider.GetComponent<Wall_Behaviour>().endGame == true && !knight.GetComponent<KnightMovement>().push && GetComponent<SpriteRenderer>().enabled && !can_I_Move){
             if(walking) move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y); 
             if(startDash) dash(startDash, currentY.y);  
         }
         // else{
-            if(can_I_Move){
+            if(can_I_Move && !end_wall_Collider.GetComponent<Wall_Behaviour>().endGame){
                 if(walking) rb.velocity = new Vector2(move.x * speed * Time.deltaTime, rb.velocity.y); 
                 else rb.velocity = new Vector2(0f, rb.velocity.y);
                 if(isJumping) jump(jumpForce);

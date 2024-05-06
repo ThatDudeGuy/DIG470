@@ -6,10 +6,12 @@ public class KnightMovement : MonoBehaviour
     public Rigidbody2D playerRigidBody;
     public Collider2D[] colliders;
     private CinemachineVirtualCamera otherCamera, playerCamera;
+    private CinemachineBrain cineBrain;
     public float speed = 0.5f, timer = 0f, timerInterval = 2f, pushPower = 5f;
     public bool move = false, attack = false, push = false;
     Vector3 playPos;
     public AudioSource[] sounds;
+    public int num_of_Attempts = 0;
     // private bool rightFace = true;
 
     // Start is called before the first frame update
@@ -18,14 +20,33 @@ public class KnightMovement : MonoBehaviour
         speed = 0.5f;
         otherCamera = GameObject.Find("Camera_Looks_Here").GetComponent<CinemachineVirtualCamera>();
         playerCamera = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
-
+        cineBrain = Camera.main.GetComponent<CinemachineBrain>();
     }
     public void cameraZoomIn(){
-        playerCamera.m_Lens.OrthographicSize = 2f;
+        // playerCamera.m_Lens.OrthographicSize = 2f;
+        otherCamera.LookAt = playerAnimator.transform;
+        otherCamera.Priority = 11;
+        otherCamera.m_Lens.OrthographicSize = 1.5f;
+        CinemachineBlenderSettings blenderSettings = new CinemachineBlenderSettings
+        {
+            m_CustomBlends = new CinemachineBlenderSettings.CustomBlend[]{
+            new CinemachineBlenderSettings.CustomBlend{
+                m_From = playerCamera.name,
+                m_To = otherCamera.name,
+                m_Blend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Style.HardIn, 0f)
+            }
+        }
+        };
+        cineBrain.m_CustomBlends = blenderSettings;
+        otherCamera.LookAt = playerAnimator.transform;
+        otherCamera.Priority = 11;
+        otherCamera.m_Lens.OrthographicSize = 1.5f;     
         GameObject.Find("battleMusic").GetComponent<AudioSource>().Pause();
     }
     public void cameraZoomOut(){
-        playerCamera.m_Lens.OrthographicSize = 5f;
+        otherCamera.Priority = -10;
+        otherCamera.m_Lens.OrthographicSize = 5f;
+        // playerCamera.m_Lens.OrthographicSize = 5f;
     }
     public void playBattleMusic(){
         GameObject.Find("battleMusic").GetComponent<AudioSource>().Play();
@@ -56,6 +77,8 @@ public class KnightMovement : MonoBehaviour
             // print("hello");
             playPos = playerAnimator.transform.position;
             push = true;
+            num_of_Attempts += 1;
+            if(num_of_Attempts != 0 && num_of_Attempts % 2 == 0) GameObject.Find("hint_Handler").GetComponent<Hint_Handler>().playFinalHint = true;
 
         }
         
@@ -78,6 +101,13 @@ public class KnightMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(num_of_Attempts >= 4) num_of_Attempts = 4; 
+        if(num_of_Attempts == 3){
+            GameObject.Find("hint_Handler").GetComponent<Hint_Handler>().playFinalHint = true;
+            playerRigidBody.GetComponent<PlayerMovement>().can_I_Move = true;
+            num_of_Attempts += 1;
+        } 
+         
         // if(Input.GetKeyDown(KeyCode.K)){
         //     // print("Attacking");
         //     animator.SetBool("Attack", true);
