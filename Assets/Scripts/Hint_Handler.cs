@@ -54,12 +54,12 @@ public class Hint_Handler : MonoBehaviour
             checkPoints.walking = true;
             battleMusic.GetComponent<AudioSource>().volume = startVolume;
         }
-        if(Input.GetKeyDown(KeyCode.A) && !pressA){ 
+        if(Input.GetKeyDown(KeyCode.A) && checkPoints.atBeginning){ 
             pressA = true;
             Destroy(keyImages[0]);
             // keyImages[0].GetComponent<SpriteRenderer>().enabled = false;
         }
-        if(Input.GetKeyDown(KeyCode.D) && !pressD){ 
+        if(Input.GetKeyDown(KeyCode.D) && checkPoints.atBeginning){ 
             pressD = true;
             Destroy(keyImages[1]);
             // keyImages[1].GetComponent<SpriteRenderer>().enabled = false;
